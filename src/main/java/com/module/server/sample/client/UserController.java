@@ -45,14 +45,14 @@ public class UserController {
      */
     @ApiOperation(value = "根据名称进行模糊查询", notes = "传入参数：name")
     @RequestMapping("findByName/{name}")
-    public User findByName(@PathVariable String name) {
+    public String findByName(@PathVariable String name) {
         try {
             User user = repository.findByNameLike( name );
             System.out.println( user.toString() );
-            return user;
+            return "succes:"+user.toString();
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return "error:"+e.getMessage();
         }
     }
     /**
@@ -62,17 +62,17 @@ public class UserController {
      * @return the user
      */
     @RequestMapping(name = "/save", method = RequestMethod.POST)
-    public User save(@RequestBody User user) {
+    public String save(@RequestBody User user) {
         try {
             User user1 = repository.saveAndFlush( user );
             if (ObjectUtils.notEqual( user1, null )) {
-                return user1;
+                return "succes:"+user1.toString();
             } else {
                 return null;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return "error:"+e.getMessage();
         }
     }
 }
