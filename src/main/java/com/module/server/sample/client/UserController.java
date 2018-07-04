@@ -5,10 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * TODO description：数据处理层
@@ -40,6 +37,24 @@ public class UserController {
         return count;
     }
 
+    /**
+     * Find by name user.
+     *
+     * @param name the name
+     * @return the user
+     */
+    @ApiOperation(value = "根据名称进行模糊查询", notes = "传入参数：name")
+    @RequestMapping("findByName/{name}")
+    public User findByName(@PathVariable String name) {
+        try {
+            User user = repository.findByNameLike( name );
+            System.out.println( user.toString() );
+            return user;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     /**
      * Save user.
      *
