@@ -33,8 +33,8 @@ public class UserController {
      * @return the all
      */
     @ApiOperation(value = "获取用户总数", notes = "传入参数：无")
-    @RequestMapping("findCound")
-    public long findCound() {
+    @RequestMapping("findCount")
+    public long findCount() {
         long count = repository.count();
         System.out.println( count );
         return count;
