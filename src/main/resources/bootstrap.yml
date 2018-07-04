@@ -1,0 +1,30 @@
+server:
+  port: 9010
+spring:
+  application:
+    name: client-demo
+  cloud:
+    config:
+      #使用discovery时需要将eureka写到该文件中推荐使用。
+      discovery:
+        enabled: true
+        service-id: config-server
+      #使用uri时eureka注册信息可以直接写在git仓库中，但这必须要先知道config-server的http://host:port。
+#      uri: http://localhost:9004
+      name: mysql
+      profile: test
+      username: configuser
+      password: configpasd
+      retry:
+        max-attempts: 3
+        max-interval: 2000
+        initial-interval: 2000
+      request-read-timeout: 10000
+#使用discovery时目前不能将eureka注册信息写到git仓库中。需要写的本文件中，否者会报找不到服务地址！目前注释调进行验证。
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:9001/eureka/
+#  instance:
+#    prefer-ip-address: true
+#    appname: client-demo
