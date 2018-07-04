@@ -1,5 +1,8 @@
 package com.module.server.sample.client;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RequestMapping("/user")
 @RestController
+@Slf4j
+@SuppressWarnings("all")
+@Api(value = "用户处理层", tags = "用户处理层")
 public class UserController {
 
     @Autowired
@@ -26,8 +32,9 @@ public class UserController {
      *
      * @return the all
      */
-    @RequestMapping("get")
-    public long getAll() {
+    @ApiOperation(value = "获取用户总数", notes = "传入参数：无")
+    @RequestMapping("findCound")
+    public long findCound() {
         long count = repository.count();
         System.out.println( count );
         return count;
